@@ -68,7 +68,7 @@ double Estimate::EStepForDocument(
   return likelihood;
 }
 
-void EstimateAlpha(Model* model, SuffStats* ss) {
+void Estimate::EstimateAlpha(Model* model, SuffStats* ss) {
 	double alpha =
         opt_alpha(ss->getAlphaSS(), ss->getDocumentNo(), model->getTopicNo());
   model->setAlpha(alpha);

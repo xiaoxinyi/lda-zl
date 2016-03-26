@@ -39,15 +39,16 @@ void OptionUtils::ReadOptions(const string& filename) {
   double em_converged = DEFAULT_EM_CONVERGED;
   int estimate_alpha = DEFAULT_ESTIMATE_ALPHA;
   
-  int topic_no = 0;
+  int topic_no = 50;
   int est = 0;
   int inf = 0;
-  int random = 0;
+  int random = 1;
   int seeded = 0;
   double alpha = 1.0;
+  int save_lag = 100;
 
-  string model_root;
-  string directory;
+  string model_root = "model";
+  string directory = "result";
 
 
 
@@ -84,6 +85,8 @@ void OptionUtils::ReadOptions(const string& filename) {
       seeded = atoi(value.c_str());
     } else if (str.compare("alpha") == 0) {
       alpha = atof(value.c_str());
+    } else if (str.compare("save_lag") == 0) {
+      save_lag = atoi(value.c_str());
     }
   }
 
@@ -103,6 +106,7 @@ void OptionUtils::ReadOptions(const string& filename) {
  	option.setSeeded(seeded);
  	option.setRandom(random);
  	option.setAlpha(alpha);
+ 	option.setSaveLag(save_lag);
 
 
  	cout << "var_max_iter : " << var_max_iter << endl;

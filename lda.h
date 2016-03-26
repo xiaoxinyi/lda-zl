@@ -49,9 +49,14 @@ public:
 														const string& filename_settings,
 													LDA* lda);
 
-	static void InitLDA(const string& filename_corpus,
+	static LDA* InitLDA(const string& filename_corpus,
 											const string& filename_settings,
 											long seed);
+	static void IterateLDA(LDA* lda);
+
+	static void TrainLDA(const string& filename_corpus,
+											 const string& filename_settings,
+											 long seed);
 };
 
 }  // namespace lda

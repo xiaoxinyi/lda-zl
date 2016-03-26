@@ -43,6 +43,10 @@ class CorpusUtils {
 public:
 	static void ReadCorpus(const string& filename,
 												 Corpus* corpus);
+
+	static void SaveGamma(const string& filename,
+												vector<vector<double>>& gamma,
+												Corpus* corpus);
 };
 
 }  // namespace lda

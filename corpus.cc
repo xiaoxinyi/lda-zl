@@ -4,6 +4,7 @@
 
 #include "document.h"
 #include "corpus.h"
+#include "inference.h"
 
 const int BUF_SIZE = 10000;
 
@@ -50,7 +51,7 @@ void CorpusUtils::ReadCorpus(
       }
       word_count_pos++;
     }
-    document.setLength(word_count_pos);
+    document.setLength(word_count_pos - 1);
     document.setTotal(words);
     corpus->addDocument(move(document));
     doc_no += 1;
@@ -63,5 +64,16 @@ void CorpusUtils::ReadCorpus(
   cout << "Number of documents in corpus: " << doc_no << endl;
   cout << "Number of distinct words in corpus: " << term_no << endl;
   cout << "Number of words in corpus: " << total_word_count << endl;
+}
+
+void CorpusUtils::SaveGamma(const string& filename,
+												vector<vector<double>>& gamma,
+												Corpus* corpus) {
+	ofstream ofs(filename);
+	int documents = corpus->getDocuments();
+	for (int i = 0; i < documents; i++) {
+		Inference::SaveGamma(ofs, gamma[i]);
+	}
+	ofs.close();
 }
 }  // namespace lda

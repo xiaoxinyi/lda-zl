@@ -50,6 +50,8 @@ public:
 	void setAlpha(double alpha) { alpha_ = alpha; }
 	double getAlpha() const { return alpha_; }
 
+	void setSaveLag(int save_lag) { save_lag_ = save_lag; }
+	int getSaveLag() const { return save_lag_; }
 
 private:
 	// Variational inference max iters.
@@ -75,6 +77,8 @@ private:
 	int seeded_;
 
 	double alpha_;
+
+	int save_lag_;
 
 	string model_root_;
 

@@ -1,7 +1,7 @@
-# The Makefile for the C++ implementation of atm
+# The Makefile for the C++ implementation of lda
 
 COMPILER = g++
-OBJS = utils.o topic.o document.o corpus.o gibbs.o atm_main.o author.o
+OBJS = utils.o document.o corpus.o lda.o lda_main.o inference.o estimate.o option.o model.o
 SOURCE = $(OBJS:.o=.cc)
 
 FLAGS = -g -Wall  -I/usr/local/Cellar/gsl/1.16/include -std=c++11
@@ -9,10 +9,10 @@ FLAGS = -g -Wall  -I/usr/local/Cellar/gsl/1.16/include -std=c++11
 # GSL library
 LIBS = -lgsl -lgslcblas -L/usr/local/Cellar/gsl/1.16/lib
 
-default: atm
+default: lda
 
-atm: $(OBJS) 
-	$(COMPILER) $(FLAGS) $(OBJS) -o atm  $(LIBS)
+lda: $(OBJS) 
+	$(COMPILER) $(FLAGS) $(OBJS) -o lda  $(LIBS)
 
 %.o: %.cc
 	$(COMPILER) -c $(FLAGS) -o $@  $< 

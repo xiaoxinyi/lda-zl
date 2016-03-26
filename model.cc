@@ -164,9 +164,18 @@ SuffStats::SuffStats()
 void SuffStats::initSuffStats(int topic_no, 
 															int term_no, 
 															int doc_no) {
-	class_word_ = vector<vector<double>>(topic_no, 
+	static int count = 0;
+	if (count++ == 0) {
+		class_word_ = vector<vector<double>>(topic_no, 
 																			 vector<double>(term_no, 0.0));
-	class_total_ = vector<double>(topic_no, 0.0);
+		class_total_ = vector<double>(topic_no, 0.0);
+	} else {
+		for (auto& vv : class_word_) {
+			fill(begin(vv), end(vv), 0.0);
+		}
+		fill(begin(class_total_), end(class_total_), 0.0);
+	}
+	
 	doc_no_ = doc_no;
 	alpha_ss_ = 0.0;
 }
