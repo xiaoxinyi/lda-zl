@@ -19,9 +19,7 @@ namespace lda {
 // =======================================================================
 
 LDA::LDA()
-		: likelihood_(0.0),
-			max_likelihood_(0.0),
-			iteration_(0) {}
+		: iteration_(0) {}
 
 
 // =======================================================================
@@ -184,5 +182,45 @@ void LDAUtils::TrainLDA(const string& filename_corpus,
 	delete lda;
 }
 
+
+void LDAUtils::InferLDA(const string& filename_corpus,
+											 const string& filename_settings,
+											 long seed) {
+	LDA* lda = new LDA;
+	ReadLDAInput(filename_corpus, filename_settings, lda);
+
+	Utils::InitRandomNumberGen(seed);
+
+	Corpus* corpus = lda->getMutableCorpus();
+	Model* model = lda->getMutableModel();
+	Option& option = Option::GetInstance();
+
+	string directory = option.getDirectory();
+	int doc_no = corpus->getDocuments();
+
+	string model_root = directory + "/final";
+
+	ModelUtils::LoadModel(model, model_root);
+
+	vector<vector<double>> gamma(doc_no, vector<double>());
+	vector<vector<double>> phi;
+
+	char filename[100];
+	sprintf(filename, "%s/infer-likelihood.dat", directory.c_str());
+	ofstream ofs(filename);
+	for (int i = 0; i < doc_no; i++) {
+		Document* document = corpus->getMutableDocument(i);
+		double likelihood = Inference::LdaInference(document, model, gamma[i], phi);
+		ofs.precision(10);
+		ofs << likelihood << endl;
+	}
+
+	ofs.close();
+	sprintf(filename, "%s/infer.gamma", directory.c_str());
+	CorpusUtils::SaveGamma(filename, gamma, corpus);
+
+	assert(lda != nullptr);
+	delete lda;
+}
 
 }  // namespace lda

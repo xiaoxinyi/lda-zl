@@ -32,11 +32,6 @@ private:
 
 	SuffStats ss_;
 
-  double likelihood_;
-
-	// The current maximum score over several iterations.
-  double max_likelihood_;
-
   // Current iteration.
   int iteration_;
 
@@ -55,6 +50,10 @@ public:
 	static void IterateLDA(LDA* lda);
 
 	static void TrainLDA(const string& filename_corpus,
+											 const string& filename_settings,
+											 long seed);
+
+	static void InferLDA(const string& filename_corpus,
 											 const string& filename_settings,
 											 long seed);
 };

@@ -6,7 +6,7 @@
 
 
 const int BUF_SIZE = 1000;
-const int DEFAULT_VAR_MAX_ITER = 10;
+const int DEFAULT_VAR_MAX_ITER = 100;
 const double DEFAULT_VAR_CONVERGED = 1e-5;
 const int DEFAULT_EM_MAX_ITER = 10000;
 const double DEFAULT_EM_CONVERGED = 1e-8;
