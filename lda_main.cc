@@ -25,7 +25,8 @@ int main(int argc, char* argv[]) {
   } else {
     cout << "Arguments: "
         "(1) corpus filename "
-        "(2) settings filename" << endl;
+        "(2) settings filename "
+        "(3) -est/-inf" << endl;
   }
   return 0;
 }
