@@ -121,7 +121,6 @@ void Inference::SaveWordAssignment(ofstream& ofs,
 void Inference::SaveGamma(ofstream& ofs,
 													vector<double>& gamma) {
 	ofs.precision(12);
-	ofs << setw(15);
 	for (auto& d : gamma) {
 		ofs << d << " ";
 	}

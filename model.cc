@@ -79,7 +79,6 @@ void ModelUtils::SaveModel(
 	assert(ofs.is_open());
 
 	ofs.precision(12);
-	ofs << setw(15);
 	ofs << "topic_no " << topic_no << endl;
 	ofs << "term_no " << term_no << endl;
 	ofs << "alpha " << model->getAlpha() << endl;
